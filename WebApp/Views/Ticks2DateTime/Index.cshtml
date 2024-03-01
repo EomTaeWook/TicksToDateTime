@@ -1,0 +1,54 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    var now = DateTime.Now;
+
+    string dateTimeString = now.ToString("yyyy-MM-dd HH:mm:ss.fff");
+}
+<div class="container mt-3">
+    <h2 class="mb-3">Convert Ticks to DateTime</h2>
+    <div class="row align-items-center justify-content-center">
+        <div class="col-md-auto">
+            <label for="ticks-input" class="form-label">Ticks:</label>
+            <input type="number" class="form-control form-control-lg wide-textbox" id="ticks-input"
+                   value="@now.Ticks" max="9223372036854775807" min="0" placeholder="Enter ticks here">
+        </div>
+        <div class="col-md-auto text-center">
+            <span>⇄</span>
+        </div>
+        <div class="col-md-auto">
+            <label for="date-input" class="form-label">Date:</label>
+            <input type="text" readonly class="form-control form-control-lg wide-textbox" id="date-input" value="@dateTimeString" placeholder="yyyy-MM-dd HH:mm:ss.fff">
+        </div>
+    </div>
+    <div class="row justify-content-center mt-3">
+        <div class="col-md-auto">
+            <button class="btn btn-primary" onclick="convert()">Convert</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    function convert() {
+        const ticks = document.getElementById('ticks-input').value;
+        console.log(ticks);
+        fetch('./ConvertTicksToDateTime', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                },
+            body: JSON.stringify({ ticks: ticks })
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            document.getElementById('date-input').value = data.dateTime;
+        })
+        .catch(error => {
+            console.error('there has been a problem with your fetch operation:', error);
+        });
+    }
+</script>

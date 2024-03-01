@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DataContainer\DataContainer.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Dignus">
+      <HintPath>..\Dll\Dignus.dll</HintPath>
+    </Reference>
+    <Reference Include="Dignus.Extensions">
+      <HintPath>..\Dll\Dignus.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Dignus.Extensions.AspNetCore">
+      <HintPath>..\Dll\Dignus.Extensions.AspNetCore.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
