@@ -1,0 +1,14 @@
+version: '3.3'
+services:
+  ticks2datetime:
+    image: trim0917/ticks2datetime:latest
+    volumes:
+      - type: bind
+        source: ./log
+        target: /App/log
+      - type: bind
+        source: ./archive
+        target: /App/archive
+    ports:
+      - "9100:9100"
+    restart: always
