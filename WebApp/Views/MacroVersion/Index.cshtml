@@ -1,0 +1,26 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@model DataContainer.VersionNote
+
+@if (Model == null)
+{
+    <div>
+        <h1>Version Information Not Available</h1>
+        <p>No data could be retrieved at this time.</p>
+    </div>
+}
+else
+{
+    <div>
+        <h1>Macro Version Information</h1>
+        <p><strong>Major:</strong> @Model.Version.Major</p>
+        <p><strong>Minor:</strong> @Model.Version.Minor</p>
+        <p><strong>Build:</strong> @Model.Version.Build</p>
+        <p>
+            <strong>Description:</strong>
+            <span style="white-space: pre-line;">@Html.Raw(Model.Description.Replace(Environment.NewLine, "<br>").Trim())</span>
+        </p>
+    </div>
+}

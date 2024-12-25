@@ -1,6 +1,7 @@
 using Dignus.Extensions.AspNetCore;
 using Dignus.Extensions.Log;
 using Dignus.Log;
+using Dignus.Utils;
 using System.Reflection;
 
 namespace WebApp
@@ -29,15 +30,26 @@ namespace WebApp
 
             app.UseAuthorization();
 
+
+            app.MapControllerRoute(
+                name: "area",
+                pattern: "{area:exists}/{controller=Ticks2DateTime}/{action=Index}/{id?}"
+            );
+
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Ticks2DateTime}/{action=Index}/{id?}");
+                pattern: "{controller=Ticks2DateTime}/{action=Index}/{id?}"
+            );
 
             app.Use(async (httpContext, next) =>
             {
                 try
                 {
-                    LogHelper.Info($"{httpContext.Connection.RemoteIpAddress} : {httpContext.Request.Path}");
+                    if (httpContext.Request.Method == HttpMethods.Get)
+                    {
+                        LogHelper.Info($"[{httpContext.Connection.RemoteIpAddress}] [{httpContext.Request.Path}]");
+                    }
+
                     await next();
                 }
                 catch (Exception ex)
@@ -61,6 +73,8 @@ namespace WebApp
             builder.Services.AddControllersWithViews();
 
             builder.Services.RegisterDependencies(Assembly.GetExecutingAssembly());
+
+            builder.Services.AddSingleton<HttpRequester, HttpRequester>();
         }
     }
 }

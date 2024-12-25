@@ -11,4 +11,7 @@ namespace DataContainer
         public DateTime DateTime { get; set; }
     }
 
+    public class GetMacroLatestVersion : IAPIRequest
+    {
+    }
 }

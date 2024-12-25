@@ -12,4 +12,10 @@ namespace DataContainer
         public long Ticks { get; set; }
         public bool Ok { get; set; }
     }
+
+    public class GetMacroLatestVersionResponse : IAPIResponse
+    {
+        public VersionNote VersionNote { get; set; }
+        public bool Ok { get; set; }
+    }
 }
