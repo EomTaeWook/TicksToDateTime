@@ -11,7 +11,7 @@ namespace WebApp.APIControllers
         protected abstract Task<IAPIResponse> Process(T request);
 
         [HttpPost]
-        public async Task<JsonResult> Post([FromBody] T request)
+        public async Task<JsonResult> PostAsync([FromBody] T request)
         {
             LogHelper.Info($"{HttpContext.Request.Path}");
             if (request == null)
