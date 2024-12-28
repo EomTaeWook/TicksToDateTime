@@ -13,11 +13,9 @@ WORKDIR /App
 
 COPY --from=build-env /App/out ./WebApp
 
-VOLUME ["/App/log"]
+VOLUME ["/App/WebApp/log"]
 
-VOLUME ["/App/archive"]
-
-VOLUME ["/App/cdn"]
+VOLUME ["/App/WebApp/archive"]
 
 WORKDIR /App/WebApp
 
