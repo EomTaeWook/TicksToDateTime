@@ -11,5 +11,10 @@ namespace WebApp.Controllers
 
             return View(versionNote);
         }
+
+        public IActionResult HelpAsync()
+        {
+            return Redirect(macroService.GetGitHubHelpUrl());
+        }
     }
 }

@@ -9,6 +9,7 @@ namespace WebApp.Services
     [Injectable(Dignus.DependencyInjection.LifeScope.Transient)]
     public class MacroService(HttpRequester httpRequester)
     {
+        private const string GitHubHelpUrl = $"https://github.com/EomTaeWook/DiademMacro/blob/master/README.md";
         public async Task<VersionNote> GetLatestVersionAsync()
         {
             try
@@ -31,6 +32,10 @@ namespace WebApp.Services
                 LogHelper.Error(ex);
             }
             return null;
+        }
+        public string GetGitHubHelpUrl()
+        {
+            return GitHubHelpUrl;
         }
     }
 }
