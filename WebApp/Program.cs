@@ -2,6 +2,7 @@ using Dignus.Extensions.AspNetCore;
 using Dignus.Extensions.Log;
 using Dignus.Log;
 using Dignus.Utils;
+using Microsoft.AspNetCore.HttpOverrides;
 using System.Reflection;
 
 namespace WebApp
@@ -30,6 +31,10 @@ namespace WebApp
 
             app.UseAuthorization();
 
+            app.UseForwardedHeaders(new ForwardedHeadersOptions()
+            {
+                ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+            });
 
             app.MapControllerRoute(
                 name: "area",
@@ -45,9 +50,16 @@ namespace WebApp
             {
                 try
                 {
+                    var clientIp = httpContext.Request.Headers["X-Forwarded-For"].FirstOrDefault();
+
+                    if (string.IsNullOrEmpty(clientIp))
+                    {
+                        clientIp = httpContext.Connection.RemoteIpAddress?.ToString();
+                    }
+
                     if (httpContext.Request.Method == HttpMethods.Get)
                     {
-                        LogHelper.Info($"[{httpContext.Connection.RemoteIpAddress}] [{httpContext.Request.Path}]");
+                        LogHelper.Info($"[{clientIp}] [{httpContext.Request.Path}]");
                     }
 
                     await next();
