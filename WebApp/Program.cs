@@ -1,3 +1,4 @@
+using DataContainer.Generated;
 using Dignus.Extensions.AspNetCore;
 using Dignus.Extensions.Log;
 using Dignus.Log;
@@ -13,14 +14,15 @@ namespace WebApp
         {
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
             LogBuilder.Configuration(LogConfigXmlReader.Load("DignusLog.config")).Build();
-
             Environment.CurrentDirectory = AppContext.BaseDirectory;
+            InitTemplate();
 
             var builder = WebApplication.CreateBuilder(new WebApplicationOptions()
             {
                 Args = args,
                 ContentRootPath = AppContext.BaseDirectory
             });
+
             InitDependency(builder);
 
             var app = builder.Build();
@@ -87,6 +89,17 @@ namespace WebApp
             builder.Services.RegisterDependencies(Assembly.GetExecutingAssembly());
 
             builder.Services.AddSingleton<HttpRequester, HttpRequester>();
+        }
+
+        private static void InitTemplate()
+        {
+            string dataPath = "../Datas";
+#if DEBUG
+            dataPath = "../../../../Datas";
+#endif
+
+            TemplateLoader.Load(dataPath);
+            TemplateLoader.MakeRefTemplate();
         }
     }
 }

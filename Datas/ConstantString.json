@@ -1,0 +1,12 @@
+[
+  {
+    "Id": 1000,
+    "Name": "GitHubRelease",
+    "Value": "https://github.com/EomTaeWook/DiademMacro/releases"
+  },
+  {
+    "Id": 1001,
+    "Name": "BuyMeaCoffee",
+    "Value": "https://www.buymeacoffee.com/EomTaeWook"
+  }
+]

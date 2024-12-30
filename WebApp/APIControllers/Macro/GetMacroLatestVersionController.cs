@@ -1,6 +1,6 @@
-﻿using DataContainer;
-using DataContainer.Interfaces;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using Protocols;
+using Protocols.Interfaces;
 using WebApp.Services;
 
 namespace WebApp.APIControllers.Macro

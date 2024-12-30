@@ -1,6 +1,6 @@
 ﻿using System.Xml.Serialization;
 
-namespace DataContainer
+namespace Protocols
 {
     [XmlRoot("VersionNote")]
     public class VersionNote

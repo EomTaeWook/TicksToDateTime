@@ -1,8 +1,8 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Macro";
 }
 
-@model DataContainer.VersionNote
+@model WebApp.ViewModel.MacroVersionIndexModel
 
 @if (Model == null)
 {
@@ -15,12 +15,12 @@ else
 {
     <div>
         <h1>Macro Version Information</h1>
-        <p><strong>Major:</strong> @Model.Version.Major</p>
-        <p><strong>Minor:</strong> @Model.Version.Minor</p>
-        <p><strong>Build:</strong> @Model.Version.Build</p>
+        <p><strong>Major:</strong> @Model.VersionNote.Version.Major</p>
+        <p><strong>Minor:</strong> @Model.VersionNote.Version.Minor</p>
+        <p><strong>Build:</strong> @Model.VersionNote.Version.Build</p>
         <p>
             <strong>Description:</strong>
-            <span style="white-space: pre-line;">@Html.Raw(Model.Description.Replace(Environment.NewLine, "<br>").Trim())</span>
+            <span style="white-space: pre-line;">@Html.Raw(Model.VersionNote.Description.Replace(Environment.NewLine, "<br>").Trim())</span>
         </p>
     </div>
 }
@@ -28,9 +28,9 @@ else
 <div>
     <h2>Download</h2>
     <p>You can download the latest version from the link below:</p>
-    <a href="https://github.com/EomTaeWook/DiademMacro/releases"
+    <a href= @Model.GitHubReleaseUrl
        target="_blank"
        class="download-link">
-        https://github.com/EomTaeWook/DiademMacro/releases
+        @Model.GitHubReleaseUrl
     </a>
 </div>

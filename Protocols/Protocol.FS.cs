@@ -1,6 +1,6 @@
-﻿using DataContainer.Interfaces;
+﻿using Protocols.Interfaces;
 
-namespace DataContainer
+namespace Protocols
 {
     public class ConvertTicksToDateTime : IAPIRequest
     {

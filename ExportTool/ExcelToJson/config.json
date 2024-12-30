@@ -1,0 +1,8 @@
+{
+  "ReadAssemblyPath": "",
+  "ReadPath": "..\\..\\ExcelTable\\",
+  "OutputRefPath": "..\\Exported\\",
+  "OutputTemplatePath": [
+    "..\\..\\Datas"
+  ]
+}

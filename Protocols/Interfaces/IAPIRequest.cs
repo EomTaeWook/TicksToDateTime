@@ -1,4 +1,4 @@
-﻿namespace DataContainer.Interfaces
+﻿namespace Protocols.Interfaces
 {
     public interface IAPIRequest
     {

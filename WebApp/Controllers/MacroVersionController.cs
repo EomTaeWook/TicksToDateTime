@@ -1,5 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using DataContainer.Generated;
+using Microsoft.AspNetCore.Mvc;
+using TemplateContainers;
 using WebApp.Services;
+using WebApp.ViewModel;
 
 namespace WebApp.Controllers
 {
@@ -9,7 +12,16 @@ namespace WebApp.Controllers
         {
             var versionNote = await macroService.GetLatestVersionAsync();
 
-            return View(versionNote);
+            var gitHubRelease = TemplateContainer<ConstantStringTemplate>.Find("GitHubRelease").Value;
+
+            var buyMeaCoffee = TemplateContainer<ConstantStringTemplate>.Find("BuyMeaCoffee").Value;
+
+            return View(new MacroVersionIndexModel()
+            {
+                VersionNote = versionNote,
+                GitHubReleaseUrl = gitHubRelease,
+                BuyMeaCoffeeUrl = buyMeaCoffee
+            });
         }
 
         public IActionResult HelpAsync()

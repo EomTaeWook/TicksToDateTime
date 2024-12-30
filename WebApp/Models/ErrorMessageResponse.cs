@@ -1,4 +1,4 @@
-﻿using DataContainer.Interfaces;
+﻿using Protocols.Interfaces;
 
 namespace WebApp.Models
 {
